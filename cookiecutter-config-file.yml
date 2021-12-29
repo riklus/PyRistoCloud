@@ -1,0 +1,13 @@
+# This file contains values from Cookiecutter
+
+default_context:
+  project_name: "pyristocloud"
+  project_description: "API Wrapper per ristoCoud™ di Opera4u unitn."
+  organization: "riklus"
+  license: "GNU GPL v3.0"
+  minimal_python_version: 3.9
+  github_name: "riklus"
+  email: "riccardo.lussana@gmail.com"
+  version: "0.1.0"
+  line_length: "88"
+  create_example_template: "none"
