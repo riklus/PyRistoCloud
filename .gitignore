@@ -3,7 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=osx,python,pycharm,windows,visualstudio,visualstudiocode
 
 ### IGNORE ###
-ignore_this
+test.py
 
 ### OSX ###
 # General
