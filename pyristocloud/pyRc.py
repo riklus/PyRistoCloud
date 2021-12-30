@@ -87,4 +87,4 @@ class Api:
             print(res.status_code, res.reason)
             return None
 
-        return res.text
+        return res.json()
