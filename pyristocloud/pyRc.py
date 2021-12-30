@@ -14,6 +14,14 @@ class Api:
         "mensa_povo1": 5,
     }
 
+    saleId = {
+        "bar_mesiano": 6,
+        "mensa_tgar": 3,
+        "mensa_mesiano": 4,
+        "mensa_povo0": 1,
+        "mensa_povo1": 2,
+    }
+
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20200731 Firefox/37.0",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -58,6 +66,12 @@ class Api:
 
     def get_orari_prenotati(self, mensa: str, data: str):
         """Ritorna gli orari disponibili nella mensa e data indicata.
+        Refettori disponibili:
+            bar_mesiano
+            mensa_tgar
+            mensa_mesiano
+            mensa_povo0
+            mensa_povo1
 
         Args:
             mensa (str): La mensa di cui vuoi sapere gli orari.
@@ -88,3 +102,24 @@ class Api:
             return None
 
         return res.json()
+
+    def salva_prenotazione(self, mensa: str, data: str, id: str):
+        if not self.isLoggedIn:
+            print("[!] Not logged in!")
+            return None
+
+        data = {
+            "data": data,
+            "orarioId": id,
+            "refettorioId": self.refettori[mensa],
+            "saleId": self.saleId[mensa],
+            "prenotati": "1",
+            "prenotazioneOldId": "",
+        }
+
+        res = self.s.post(
+            "https://opera4u.operaunitn.cloud/prenota_tavolo/salva_prenotazione",
+            headers=self.headers,
+            data=data,
+        )
+        return res.ok
