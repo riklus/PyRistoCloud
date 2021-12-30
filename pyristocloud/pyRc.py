@@ -1,6 +1,6 @@
 import requests
 
-"""Api wrapper"""
+"""Semplice Api wrapper per prenotare la mensa RistoCloud UNITN"""
 
 
 class Api:
@@ -41,11 +41,9 @@ class Api:
         Returns:
             bool: successo del login.
 
-        Examples:
-            .. code:: python
-
-                >>> api.login("mario.rossi@studenti.unitn.it", "password1234")
-                True
+        Examples::
+            >>> api.login("mario.rossi@studenti.unitn.it", "password1234")
+            True
         """
         data = {"coming_from": "", "username": username, "password": password}
 
@@ -80,11 +78,9 @@ class Api:
         Returns:
             dict: dizionario contentente gli orari.
 
-        Examples:
-            .. code:: python
-
-                >>> api.get_orari_prenotati("mensa_tgar", "31/12/2021")
-                True
+        Examples::
+            >>> api.get_orari_prenotati("mensa_tgar", "31/12/2021")
+            True
         """
         if not self.isLoggedIn:
             print("[!] Not logged in!")
@@ -125,8 +121,8 @@ class Api:
             bool: prenotazione effettuata.
 
         Examples::
-                >>> api.salva_prenotazione("mensa_tgar", "31/12/2021", "49")
-                True
+            >>> api.salva_prenotazione("mensa_tgar", "31/12/2021", "49")
+            True
         """
         if not self.isLoggedIn:
             print("[!] Not logged in!")
