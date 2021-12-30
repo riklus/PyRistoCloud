@@ -90,6 +90,10 @@ class Api:
             print("[!] Not logged in!")
             return None
 
+        if not (mensa in self.refettori):
+            print("[!] Mensa non trovata.")
+            return None
+
         data = {"refettori_id": self.refettori[mensa], "data": data}
 
         res = self.s.post(
@@ -103,10 +107,34 @@ class Api:
 
         return res.json()
 
-    def salva_prenotazione(self, mensa: str, data: str, id: str):
+    def salva_prenotazione(self, mensa: str, data: str, id: str) -> bool:
+        """Prenota il posto in mensa in una certa data.
+        Refettori disponibili:
+            bar_mesiano
+            mensa_tgar
+            mensa_mesiano
+            mensa_povo0
+            mensa_povo1
+
+        Args:
+            mensa (str): La mensa dove vuoi prenotare il posto.
+            data (str): La data nella quale vuoi prenotare il posto.
+            id (str): L'id dell'orario nel quale vuoi prenotare il posto.
+
+        Returns:
+            bool: prenotazione effettuata.
+
+        Examples::
+                >>> api.salva_prenotazione("mensa_tgar", "31/12/2021", "49")
+                True
+        """
         if not self.isLoggedIn:
             print("[!] Not logged in!")
-            return None
+            return False
+
+        if not (mensa in self.refettori or mensa in self.saleId):
+            print("[!] Mensa non trovata.")
+            return False
 
         data = {
             "data": data,
