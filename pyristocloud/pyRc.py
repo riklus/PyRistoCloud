@@ -80,7 +80,17 @@ class Api:
 
         Examples::
             >>> api.get_orari_prenotati("mensa_tgar", "31/12/2021")
-            True
+            [
+                "id": 22,
+                "tipo_pasto_id": 3,
+                "orario_inizio": "12:15",
+                "orario_fine": "12:30",
+                "totale_prenotato": 0,
+                "totale_prenotabile": 46,
+                "percentuale": 0,
+                "isBookale": true,
+                "isEditable": true
+            ]
         """
         if not self.isLoggedIn:
             print("[!] Not logged in!")
@@ -101,7 +111,7 @@ class Api:
             print(res.status_code, res.reason)
             return None
 
-        return res.json()
+        return res.json()["reservations"]
 
     def salva_prenotazione(self, mensa: str, data: str, id: str) -> bool:
         """Prenota il posto in mensa in una certa data.
