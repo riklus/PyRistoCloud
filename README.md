@@ -40,7 +40,7 @@ else:
   exit()
 ```
 
-Per altri esempi visita [cartella esempi](https://github.com/riklus/pyristocloud/examples)
+Per altri esempi visita [cartella esempi](https://github.com/riklus/PyRistoCloud/tree/main/examples)
 
 ## Makefile usage
 
