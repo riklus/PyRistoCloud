@@ -17,54 +17,30 @@ API Wrapper per ristoCoud™ di Opera4u unitn.
 
 </div>
 
-## How to contribute
+PyRistoCloud è un semplicissimo wrapper API per verificare se i posti a mensa sono liberi ed effettuare le prenotazioni. Niente di fancy.
 
-### Dependencies
-
-We use `poetry` to manage the [dependencies](https://github.com/python-poetry/poetry).
-If you dont have `poetry`, you should install with `make poetry-download`.
-
-To install dependencies and prepare [`pre-commit`](https://pre-commit.com/) hooks you would need to run `install` command:
+## Installazione
 
 ```bash
-make install
-make pre-commit-install
+pip3 install git+https://github.com/riklus/PyRistoCloud.git
 ```
 
-To activate your `virtualenv` run `poetry shell`.
+## Esempio
 
-### Codestyle
+```python3
+from pyristocloud import pyRc
 
-After installation you may execute code formatting.
+rc = pyRc.Api()
+logged = rc.login("nome.cognome@studenti.unitn.it", "pass")
 
-```bash
-make codestyle
+if logged:
+  print("Login effettuato!")
+else:
+  print("Errore login.")
+  exit()
 ```
 
-### Checks
-
-Many checks are configured for this project. Command `make check-codestyle` will check black, isort and darglint.
-The `make check-safety` command will look at the security of your code.
-
-Comand `make lint` applies all checks.
-
-### Before submitting
-
-Before submitting your code please do the following steps:
-
-1. Add any changes you want
-1. Add tests for the new changes
-1. Edit documentation if you have changed something significant
-1. Run `make codestyle` to format your changes.
-1. Run `make lint` to ensure that types, security and docstrings are okay.
-
-### Other help
-
-You can contribute by spreading a word about this library.
-It would also be a huge contribution to write
-a short article on how you are using this project.
-You can also share your best practices with us.
-
+Per altri esempi visita [cartella esempi](https://github.com/riklus/pyristocloud/examples)
 
 ## Makefile usage
 
