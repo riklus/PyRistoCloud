@@ -13,7 +13,7 @@
 [![License](https://img.shields.io/github/license/riklus/pyristocloud)](https://github.com/riklus/pyristocloud/blob/master/LICENSE)
 ![Coverage Report](assets/images/coverage.svg)
 
-API Wrapper per ristoCoud™ di Opera4u unitn.
+API Wrapper per ristoCoud™ per Opera4u unitn.
 
 </div>
 
