@@ -15,7 +15,7 @@ API Wrapper per ristoCoud™, Opera4u unitn.
 
 </div>
 
-PyRistoCloud è un semplicissimo wrapper API per verificare se i posti a mensa sono liberi ed effettuare le prenotazioni. Niente di fancy.
+PyRistoCloud è un semplicissimo wrapper API, scritto in Python 3.9.9, per verificare se i posti a mensa sono liberi ed effettuare le prenotazioni. Niente di fancy.
 
 ## Installazione
 
