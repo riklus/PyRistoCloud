@@ -5,6 +5,12 @@ from pyristocloud import pyRc
 rc = pyRc.Api()
 logged = rc.login("nome.cognome@studenti.unitn.it", "pass")
 
+if logged:
+    print("Login effettuato!")
+else:
+    print("Errore login.")
+    exit()
+
 giorno_inizio_settimana = 3
 mese = "12"
 anno = "2022"
