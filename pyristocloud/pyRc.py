@@ -57,9 +57,6 @@ class Api:
         # Il login restituisce 302 se ha funzionato e 200 se fallisce.
         self.isLoggedIn = res.status_code == 302
 
-        if not self.isLoggedIn:
-            print("[!] Login Failed:", res.status_code, res.reason)
-
         return self.isLoggedIn
 
     def get_orari_prenotati(self, mensa: str, data: str):
@@ -93,12 +90,10 @@ class Api:
             ]
         """
         if not self.isLoggedIn:
-            print("[!] Not logged in!")
-            return None
+            raise Exception("Not logged in!")
 
         if not (mensa in self.refettori):
-            print("[!] Mensa non trovata.")
-            return None
+            raise ValueError("La mensa richiesta non esiste o non è disponibile.")
 
         data = {"refettori_id": self.refettori[mensa], "data": data}
 
@@ -107,11 +102,10 @@ class Api:
             headers=self.headers,
             data=data,
         )
-        if not res.ok:
-            print(res.status_code, res.reason)
+        if res.ok:
+            return res.json()["reservations"]
+        else:
             return None
-
-        return res.json()["reservations"]
 
     def salva_prenotazione(self, mensa: str, data: str, id: str) -> bool:
         """Prenota il posto in mensa in una certa data.
@@ -135,12 +129,10 @@ class Api:
             True
         """
         if not self.isLoggedIn:
-            print("[!] Not logged in!")
-            return False
+            raise Exception("Not logged in!")
 
         if not (mensa in self.refettori or mensa in self.saleId):
-            print("[!] Mensa non trovata.")
-            return False
+            raise ValueError("La mensa richiesta non esiste o non è disponibile.")
 
         data = {
             "data": data,
