@@ -243,6 +243,12 @@ make cleanup
 
 This project is licensed under the terms of the `GNU GPL v3.0` license. See [LICENSE](https://github.com/riklus/pyristocloud/blob/master/LICENSE) for more details.
 
+
+### Esclusione di responsabilità
+Non mi assumo, né espressamente né tacitamente, la responsabilità per l’utilizzo di questo software.  
+Non sono affiliato in **alcun** modo a Opera o a ristoCoud™.   
+Questo è un progetto nato per puro svago, e in **alcun** modo intende recare danno o problemi, di qualsiasi natura o entità, a Opera o a ristoCoud™ o a terzi.
+
 ## 📃 Citation
 
 ```bibtex
