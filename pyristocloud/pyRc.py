@@ -1,6 +1,20 @@
+from typing_extensions import TypedDict
+
 import requests
 
 """Semplice Api wrapper per prenotare la mensa RistoCloud UNITN"""
+
+
+class orario(TypedDict):
+    id: int
+    tipo_pasto_id: int
+    orario_inizio: str
+    orario_fine: str
+    totale_prenotato: int
+    totale_prenotabile: int
+    percentuale: int
+    isBookale: bool
+    isEditable: bool
 
 
 class Api:
@@ -59,7 +73,7 @@ class Api:
 
         return self.isLoggedIn
 
-    def get_orari_prenotati(self, mensa: str, data: str):
+    def get_orari_prenotati(self, mensa: str, data: str) -> list[orario]:
         """Ritorna gli orari disponibili nella mensa e data indicata.
         Refettori disponibili:
             bar_mesiano
@@ -78,15 +92,17 @@ class Api:
         Examples::
             >>> api.get_orari_prenotati("mensa_tgar", "31/12/2021")
             [
-                "id": 22,
-                "tipo_pasto_id": 3,
-                "orario_inizio": "12:15",
-                "orario_fine": "12:30",
-                "totale_prenotato": 0,
-                "totale_prenotabile": 46,
-                "percentuale": 0,
-                "isBookale": true,
-                "isEditable": true
+                {
+                    "id": 22,
+                    "tipo_pasto_id": 3,
+                    "orario_inizio": "12:15",
+                    "orario_fine": "12:30",
+                    "totale_prenotato": 0,
+                    "totale_prenotabile": 46,
+                    "percentuale": 0,
+                    "isBookale": True,
+                    "isEditable": True
+                }
             ]
         """
         if not self.isLoggedIn:
