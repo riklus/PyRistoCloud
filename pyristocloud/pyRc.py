@@ -187,3 +187,29 @@ class Api:
             return prenotazioneNoParser.data
         else:
             return None
+
+    def annulla_prenotazione(self, id: str) -> bool:
+        """Annulla una prenotazione tramite il suo id.
+
+        Args:
+            id (str): Id della prenotazione.
+
+        Returns:
+            bool: Successo della cancellazione.
+
+        Examples::
+            >>> api.annulla_prenotazione("172822")
+            True
+        """
+        if not self.isLoggedIn:
+            raise Exception("Not logged in!")
+
+        data = {"id": id}
+
+        res = self.s.post(
+            "https://opera4u.operaunitn.cloud/prenota_tavolo/annulla_prenotazione",
+            headers=self.headers,
+            data=data,
+        )
+
+        return res.ok
