@@ -97,7 +97,8 @@ class Api:
             data (str): La data di cui vuoi sapere gli orari.
 
         Returns:
-            dict: dizionario contentente gli orari.
+            list[orario]: lista contentente gli orari.
+            None: Errore nella richiesta.
 
         Examples::
             >>> api.get_orari_prenotati("mensa_tgar", "31/12/2021")
