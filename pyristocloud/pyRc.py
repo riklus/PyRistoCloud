@@ -1,4 +1,4 @@
-from typing_extensions import TypedDict
+from typing import TypedDict
 
 import requests
 
@@ -164,4 +164,4 @@ class Api:
             headers=self.headers,
             data=data,
         )
-        return res.ok
+        return res.text
