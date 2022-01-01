@@ -1,5 +1,7 @@
 from typing import TypedDict
 
+from html.parser import HTMLParser
+
 import requests
 
 """Semplice Api wrapper per prenotare la mensa RistoCloud UNITN"""
@@ -15,6 +17,14 @@ class orario(TypedDict):
     percentuale: int
     isBookale: bool
     isEditable: bool
+
+
+class PrenotazioneNoParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        if tag == "button":
+            for attr in attrs:
+                if attr[0] == "data-prenotazione":
+                    self.data = attr[1]
 
 
 class Api:
@@ -123,7 +133,7 @@ class Api:
         else:
             return None
 
-    def salva_prenotazione(self, mensa: str, data: str, id: str) -> bool:
+    def salva_prenotazione(self, mensa: str, data: str, id: str) -> str:
         """Prenota il posto in mensa in una certa data.
         Refettori disponibili:
             bar_mesiano
@@ -138,11 +148,12 @@ class Api:
             id (str): L'id dell'orario nel quale vuoi prenotare il posto.
 
         Returns:
-            bool: prenotazione effettuata.
+            str: ID della prenotazione effettuata.
+            None: Prenotazione non registrata nel Database (Potrebbe comunque arrivare l'email di conferma)
 
         Examples::
             >>> api.salva_prenotazione("mensa_tgar", "31/12/2021", "49")
-            True
+            172822
         """
         if not self.isLoggedIn:
             raise Exception("Not logged in!")
@@ -164,4 +175,14 @@ class Api:
             headers=self.headers,
             data=data,
         )
-        return res.text
+
+        if not res.ok:
+            return None
+
+        prenotazioneNoParser = PrenotazioneNoParser()
+        prenotazioneNoParser.feed(res.text)
+
+        if hasattr(prenotazioneNoParser, "data"):
+            return prenotazioneNoParser.data
+        else:
+            return None
